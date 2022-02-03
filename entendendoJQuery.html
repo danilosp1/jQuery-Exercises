@@ -9,11 +9,26 @@
 </head>
 
 <body class="conteudo exercicio">
+    <!-- Foco em consultar elementos da página e manipular de alguma forma -->
     <h1>Entendendo jQuery</h1>
     <div>1</div>
     <div>2</div>
 
     <script>
-        // ...
+        // tempo de animação nos parâmetros
+        $('div').hide(5000).show(5000).fadeOut(5000)
+
+        console.log($('div').get(0)) // pegando objeto puro da DOM
+
+        console.log($.isEmptyObject({ nome: null })) // verifica se o objeto está vazio
+
+        console.log(jQuery.inArray(3, [1,2,3])) // chamar funções usando a própria referencia do jQuery
+
+        $.fn.fundoVerde = function() {
+            this.css('background-color', 'green')
+            return this // retorna o próprio objeto, permitindo continuar aplicando chamadas consecutivas
+        }
+
+        $('body').fundoVerde().fadeOut(15000)
     </script>
 </body>
