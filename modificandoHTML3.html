@@ -20,6 +20,12 @@
             { nome: 'Julia', nota: 9.7 }
         ]
         
-        // ...
+        $('#conteudo').append('<table>')
+        pessoas.forEach((value, index) => {
+            console.log(value)
+            $('table').append('<tr>')
+            $(`tr:eq(${index})`).append(`<td>${value.nome}</td>`)
+            $(`tr:eq(${index})`).append(`<td>${value.nota}</td>`)
+        })
     </script>
 </body>
