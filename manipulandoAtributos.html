@@ -23,6 +23,46 @@
     <h1>Manipulando Atributos</h1>
     <div wm-relogio='1000'></div>
     <script>
-        // ...
+        function Clock(element){
+            const correctHour = $('<p>')
+            const downButton = $('<button>').html('-')
+            const upButton = $('<button>').html('+')
+
+            const $element = $(element)
+            $element.append(correctHour, downButton, upButton)
+
+            const getInterval = () => {
+                return parseInt($element.attr('wm-relogio'))
+            }
+
+            let timer = null
+            const start = () => {
+                if (timer) clearInterval(timer)
+                timer = setInterval(() => {
+                    correctHour.html(new Date().toLocaleTimeString('pt-br'))
+                }, getInterval())
+            }
+
+            const changeInterval = delta => {
+                // seleciona o maior valor dentre os dois parametros
+                const newTime = Math.max(getInterval() + delta, 1000)
+                $element.attr('wm-relogio', newTime)
+                start()
+            } 
+
+            downButton.click(e => changeInterval(1000))
+            upButton.click(e => changeInterval(-1000))
+            start()
+        }
+
+        $('[wm-relogio]').each((i, e) => {
+            new Clock(e)
+        })
+
+        // $('[wm-relogio]').attr('opa') // ler atributo
+        // $('[wm-relogio]').attr('opa', 3) // alterar ou incluir
+        // $('[wm-relogio]').removeAttr('opa') // remover
+
+
     </script>
 </body>
