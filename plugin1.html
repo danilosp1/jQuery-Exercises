@@ -22,6 +22,31 @@
     </div>
 
     <script>
-        // ...
+        // const $ = { nome: 'exemplo de que não é um jQuery' }
+
+        // forma de proteger a variável $ para ser somente do jQuery nesse escopo
+        (function ($){ 
+            // $.fn -> prototype
+            $.fn.interpretar = function () {
+                const retirarChaves = s => s.substring(2, s.length - 2)
+
+                const conteudo = $(this).html()
+
+                // regex -> precisa colocar \{ duas vezes para pegar chave; . para qualquer caractere; + para 1 ou mais caracteres; } fechando; g é flag global (ou seja, vai retornar um array com todos)
+                const expressoesComChaves = conteudo.match(/\{\{.+\}\}/g)
+
+                const expressoes = expressoesComChaves.map(retirarChaves)
+
+                const resultados = expressoes.map(e => eval(e))
+
+                let conteudoFinal = conteudo
+                for (let i = 0; i < expressoesComChaves.length; i++){
+                    conteudoFinal = conteudoFinal.replace(expressoesComChaves[i], resultados[i])
+                }
+                $(this).html(conteudoFinal)
+            }
+        })(jQuery)
+
+        $('div').interpretar()
     </script>
 </body>
