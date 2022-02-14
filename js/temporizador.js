@@ -6,15 +6,21 @@
             horario: '23:59:59'
         }, opcoes)
 
-        const horaDezena = $('<span class="digito">').html('0')
-        const horaUnidade = $('<span class="digito">').html('0')
-        const minutoDezena = $('<span class="digito">').html('0')
-        const minutoUnidade = $('<span class="digito">').html('0')
-        const segundoDezena = $('<span class="digito">').html('0')
-        const segundoUnidade = $('<span class="digito">').html('0')
+        function criarSpan(classe, valor){
+            return $(`<span class="${classe}">`).html(valor)
+        }
 
-        const separadorHora = $('<span class="separador">').html(':')
-        const separadorMinuto = $('<span class="separador">').html(':')
+        const diaDezena = criarSpan('digito', "0")
+        const diaUnidade = criarSpan('digito', "0")
+        const horaDezena = criarSpan('digito', "0")
+        const horaUnidade = criarSpan('digito', "0")
+        const minutoDezena = criarSpan('digito', "0")
+        const minutoUnidade = criarSpan('digito', "0")
+        const segundoDezena = criarSpan('digito', "0")
+        const segundoUnidade = criarSpan('digito', "0")
+
+        const separadorHora = criarSpan('separador', ":")
+        const separadorMinuto = criarSpan('separador', ":")
         const mensagem = $('<div class="mensagem">').html(opcoesFinais.mensagem)
 
         $(this).addClass('temporizador')
